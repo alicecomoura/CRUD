@@ -1,12 +1,11 @@
-'use strict'
-
 const openModal = () => document.getElementById('modal')
     .classList.add('active')
 
-const closeModal = () => document.getElementById('modal')
-    .classList.remove('active')
-
-// CRUD -create read update delete
+const closeModal = () => {
+    clearFields()
+    document.getElementById('modal')
+        .classList.remove('active')
+} 
 
 const tempClient = {  //tempory client
     name: 'Rafa',
@@ -17,6 +16,8 @@ const tempClient = {  //tempory client
 
 const getLocalStorage = () => JSON.parse(localStorage.getItem('database_client')) ?? []
 const setLocalStorage = (databaseClient) => localStorage.setItem('database_client', JSON.stringify(databaseClient))
+
+// CRUD -create read update delete
 
 const deleteClient = (index) => {
     const databaseClient = readClient()
@@ -39,6 +40,30 @@ const createClient = (client) => {
     
 }
 
+const isValidFields = () => {
+    return document.getElementById('form').reportValidity()
+}
+
+// user 
+
+const clearFields = () => {
+    const fields = document.querySelectorAll('.modal-field')
+    fields.forEach(field => field.value = '')
+}
+
+const saveClient = () => {
+    if (isValidFields()) {
+        const client = {
+            nome: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            celphone: document.getElementById('celphone').value,
+            city: document.getElementById('city').value,
+        }
+        createClient(client)
+        closeModal()
+    }
+}
+
 
 // Events
 
@@ -47,3 +72,6 @@ document.getElementById('cadastrarCliente')
 
 document.getElementById('modalClose')
     .addEventListener('click', closeModal)
+
+document.getElementById('save')
+    .addEventListener('click', saveClient)
