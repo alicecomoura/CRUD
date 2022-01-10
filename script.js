@@ -7,13 +7,6 @@ const closeModal = () => {
         .classList.remove('active')
 } 
 
-/* const tempClient = {  //tempory client
-    name: 'Alice',
-    email: 'Alice@gmail.com',
-    cellphone: '125488759',
-    city: 'Rio de Janeiro'
-} */
-
 const getLocalStorage = () => JSON.parse(localStorage.getItem('database_client')) ?? []
 const setLocalStorage = (databaseClient) => localStorage.setItem('database_client', JSON.stringify(databaseClient))
 
@@ -122,14 +115,17 @@ const editAndDelete = (event) => {
         if (action == 'edit') {
             editClient(index)
         } else {
-            console.log('excluindo')
+            const client = readClient()[index]
+            const response = confirm(`Deseja realmente excluir o cliente ${client.name}`)
+            if(response) {
+                deleteClient(index)
+                updateTable()
+            }
         }
     }
 }
 
-
 updateTable()
-
 
 // Events
 
