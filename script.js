@@ -7,12 +7,12 @@ const closeModal = () => {
         .classList.remove('active')
 } 
 
-const tempClient = {  //tempory client
-    name: 'Rafa',
-    email: 'rafa@gmail.com',
-    celphone: '125488759',
+/* const tempClient = {  //tempory client
+    name: 'Alice',
+    email: 'Alice@gmail.com',
+    cellphone: '125488759',
     city: 'Rio de Janeiro'
-}
+} */
 
 const getLocalStorage = () => JSON.parse(localStorage.getItem('database_client')) ?? []
 const setLocalStorage = (databaseClient) => localStorage.setItem('database_client', JSON.stringify(databaseClient))
@@ -37,14 +37,11 @@ const createClient = (client) => {
     const databaseClient = getLocalStorage()
     databaseClient.push(client)
     setLocalStorage(databaseClient)
-    
 }
 
 const isValidFields = () => {
     return document.getElementById('form').reportValidity()
 }
-
-// user 
 
 const clearFields = () => {
     const fields = document.querySelectorAll('.modal-field')
@@ -54,15 +51,40 @@ const clearFields = () => {
 const saveClient = () => {
     if (isValidFields()) {
         const client = {
-            nome: document.getElementById('name').value,
+            name: document.getElementById('name').value,
             email: document.getElementById('email').value,
-            celphone: document.getElementById('celphone').value,
+            cellphone: document.getElementById('cellphone').value,
             city: document.getElementById('city').value,
         }
         createClient(client)
         closeModal()
     }
 }
+
+const createRow = (client) => {
+    const newRow = document.createElement('tr')
+    newRow.innerHTML = `
+        <td>${client.name}</td>
+        <td>${client.email}</td>
+        <td>${client.cellphone}</td>
+        <td>${client.city}</td>
+        <td>
+            <button type="button" class="button green">editar</button>
+            <button type="button" class="button red">excluir</button>
+        </td>
+    `
+
+    document.querySelector('#table-client>tbody').appendChild(newRow)
+}
+
+const updateTable = () => {
+    const databaseClient = readClient()
+    clearTable()
+    databaseClient.forEach(createRow)
+}
+
+
+updateTable()
 
 
 // Events
