@@ -57,6 +57,7 @@ const saveClient = () => {
             city: document.getElementById('city').value,
         }
         createClient(client)
+        updateTable()
         closeModal()
     }
 }
@@ -77,12 +78,16 @@ const createRow = (client) => {
     document.querySelector('#table-client>tbody').appendChild(newRow)
 }
 
+const clearTable = () => {
+    const rows = document.querySelectorAll('#table-client>tbody tr')
+    rows.forEach(row => row.parentNode.removeChild(row))
+}
+
 const updateTable = () => {
     const databaseClient = readClient()
     clearTable()
     databaseClient.forEach(createRow)
 }
-
 
 updateTable()
 
