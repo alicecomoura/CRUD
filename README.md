@@ -1,16 +1,16 @@
-# Customer Base
+# Cadastro de Clientes
 
-The customer registration application was developed based on CRUD: 
+Essa aplicação consiste em explocar os conceitos do CRUD: 
 
-✅ C: Create - Create a new customer
+✅ C: `create` - criar um novo cliente
 
-👁 R: Read - Read customer registration information
+👁 R: `read` - ler a informação do cliente
 
-♻️ U: Update - Update customer data (when editing)
+♻️ U: `update` - atualizar os dados do cliente (quando editado)
 
-❌ D: Delete - Delete the customer and their data
+❌ D: `Delete` - exclui os dados do cliente
 
-All data is stored in localStorage
+Os dados estão sendo salvos no `localStorage`
 
 
 ![cadastro-clientes gif](https://user-images.githubusercontent.com/78990348/148842499-6108ba49-e017-4be5-a4e1-621bd5859f24.gif)
